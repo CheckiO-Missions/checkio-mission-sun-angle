@@ -1,0 +1,130 @@
+<body data-author="Doppelok">
+<div class="question-answer">
+    <div class="question">
+        Je ne sais pas comment commencer à résoudre cette mission
+    </div>
+    <div class="answer">
+        L'idée est de trouver la correspondance entre une heure et un degré, entre une minute et un degré.
+         Ensuite, il suffit de calculer l'angle d'inclinaison, en tenant compte du fait que 18h00 correspond à 180 degrés et que 6h00 correspond à 0 degré.
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        J'ai besoin d'aide pour poursuivre la mission
+    </div>
+    <div class="answer">
+        Il serait utile de lire quelques informations sur:
+       <a href='https://docs.python.org/3.10/library/stdtypes.html'>str.split()</a>
+        (<a href='https://www.w3schools.com/python/ref_string_split.asp'>example</a> ),
+       <a href='https://docs.python.org/3.10/library/functions.html?#map'>map()</a>
+        (<a href='https://www.w3schools.com/python/ref_func_map.asp'>example</a> ), et
+       <a href='https://docs.python.org/3.10/library/functions.html?#int'>int()</a>
+        (<a href='https://www.w3schools.com/python/ref_func_int.asp'>example</a> ).
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Besoin d'aide!
+    </div>
+    <div class="answer">
+        Commençons par préparer notre ligne d'entrée avant le calcul. Nous allons transférer aux variables "h"
+        et "m" les valeurs des heures et des minutes, respectivement, déjà converties en nombres entiers à l'aide des fonctions map() et int()
+        les fonctions map() et int(). La forme d'enregistrement à travers la virgule "h, m = map(int, ...)" est équivalente à la forme suivante "h = int, ...)"
+        à la forme suivante "h = int(...)" et "m = int(...)". Nous utilisons la fonction int() pour chaque élément de la ligne de séparation en utilisant le séparateur ":"
+        en utilisant le séparateur ":".
+       <pre class="brush: python">
+time = "07:00"
+h, m = map(int, time.split(':'))
+print(h)
+print(m)
+
+# Output:
+# 7
+# 0
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Je ne sais plus quoi faire. J'ai besoin d'un petit conseil.
+    </div>
+    <div class="answer">
+        Passons à la formule de calcul. Les heures et les minutes sont corrélées aux degrés de la manière suivante: 6 heures = 90
+        degrés, donc 90/6 = 15, 1 heure correspond à 15 degrés; 6 heures = 360 minutes = 90 degrés, donc 90/360 = 0,25, 1 minute correspond à 0,25 degré
+        est de 0,25 degré. 6:00 = 0 degré, alors lors du calcul, nous devons en tenir compte en retirant 90 du résultat
+        en retirant 90 du résultat. La formule sera la suivante.
+       <pre class="brush: python">
+time = "07:00"
+h, m = map(int, time.split(':'))
+angle = 15 * h + m * 0.25 - 90
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Rien ne fonctionne. SOS
+    </div>
+    <div class="answer">
+        Vous devez écrire la condition de if qui vous renverra soit le résultat, si le soleil est visible,
+        soit la phrase "Je ne vois pas le soleil!", si le soleil n'est pas visible. Nous utilisons l'opérateur ternaire à cette fin.
+       <pre class="brush: python">
+time = "07:00"
+h, m = map(int, time.split(':'))
+angle = 15 * h + m * 0.25 - 90
+print(angle) if 0 <= angle <= 180 else print("I don't see the sun!")
+
+# Output:
+# 15.0
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Je ne veux pas abandonner, à l'aide!
+    </div>
+    <div class="answer">
+        Tout ce que vous avez à faire est d'envelopper votre code dans une fonction, et d'ajouter notre condition if à l'expression de retour.
+       <pre class="brush: python">
+def sun_angle(time: str) -> Union[float, str]:
+    h, m = map(int, time.split(':'))
+    angle = 15 * h + m * 0.25 - 90
+    return angle if 0 <= angle <= 180 else "I don't see the sun!"
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Je veux être le meilleur des meilleurs PROGRAMMEURS!!! MONTREZ-MOI D'AUTRES SOLUTIONS!!1!!!11!
+    </div>
+    <div class="answer">
+        D'accord, d'accord! C'est l'esprit!=)
+        La formule est la même que dans notre décision, mais au lieu de diviser la ligne en composantes de la liste, on utilise simplement le
+        slicing.
+       <pre class="brush: python">
+def sun_angle(time):
+    t = int(time[:2]) * 15 + int(time[3:]) / 4 - 90
+    return t if 0 <= t <= 180 else "I don't see the sun!"
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        J'en veux plus!
+    </div>
+    <div class="answer">
+        Regardez cette solution. Avec l'aide du module datetime, nous pouvons effectuer notre calcul en unités de temps,
+        et seulement ensuite traduire la valeur en unités d'angle.
+       <pre class="brush: python">
+import datetime
+def sun_angle(time):
+    start=datetime.datetime.strptime("06:00","%H:%M")
+    end=datetime.datetime.strptime("18:00","%H:%M")
+    time=datetime.datetime.strptime(time,"%H:%M")
+    diff=(time-start).seconds/60*0.25
+    return diff if start<=time<=end else "I don't see the sun!"
+        </pre>
+    </div>
+</div>
+
+
+</body>
