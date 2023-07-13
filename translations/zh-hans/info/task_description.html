@@ -1,0 +1,45 @@
+<!-- Describe task in general -->
+
+<p>
+    每个真正的旅行者都必须知道如何做三件事：灭火、找水和从周围的大自然中提取有用的信息。编程不会帮您灭火和找水，但在提取信息方面，它可能正是您所需要的。
+</p>
+
+<p>
+    您的任务是根据一天中的时间找出太阳在地平线上的角度。输入数据：早上6:00太阳从东方升起，对应角度为0度。中午12:00太阳到达天顶，这意味着角度等于90度。下午 6:00 是日落时间，因此角度为 180 度。如果输入的是晚上的时间（早上6:00之前或下午6:00之后），您的函数将返回 "我看不到太阳！"。
+</p>
+
+
+<p style="text-align: center;">
+    <img  title="Sun angle" src="{{MEDIA}}sun.png" alt="example" style="max-height: 400px">
+</p>
+
+<!-- Explain input and output values -->
+<p>
+   <strong>输入： </strong> 一天中的时间。
+</p>
+
+<p>
+   <strong>输出： </strong> 太阳角度，四舍五入到小数点后2位。
+</p>
+
+
+<!-- Put some usage examples -->
+<div class="for_info_only">
+<p>
+<strong>举例说明</strong>
+</p>
+<pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
+</div>
+
+<!-- Here you can explain how it can be used in development and what is usage of this. -->
+<!-- The section is optional -->
+<p class="for_info_only">
+   <strong>如何使用： </strong>
+    有一天，如果您在远离文明的地方迷路，它可以救您一命。
+</p>
+
+<!-- Here you can explain some constraints for input-->
+<!-- The section is optional -->
+<p><strong>前提条件</strong><br>
+    00:00 &lt;= 时间 &lt;= 23:59
+</p>

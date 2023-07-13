@@ -1,0 +1,130 @@
+<body data-author="Doppelok">
+<div class="question-answer">
+    <div class="question">
+        我不知道如何开始解决这个任务
+    </div>
+    <div class="answer">
+        我的想法是找到1小时和1度之间，1分钟和1度之间的对应关系。
+         然后计算倾角，考虑到18:00是180度，6:00是0度。
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        我需要帮助以继续完成任务
+    </div>
+    <div class="answer">
+        请阅读以下信息：
+       <a href='https://docs.python.org/3.10/library/stdtypes.html'>str.split()</a>
+        (<a href='https://www.w3schools.com/python/ref_string_split.asp'>example</a> )、
+       <a href='https://docs.python.org/3.10/library/functions.html?#map'>map()</a>
+        (<a href='https://www.w3schools.com/python/ref_func_map.asp'>example</a> ), 和
+       <a href='https://docs.python.org/3.10/library/functions.html?#int'>int()</a>
+        (<a href='https://www.w3schools.com/python/ref_func_int.asp'>example</a> )。
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        需要帮助
+    </div>
+    <div class="answer">
+        让我们从计算前的输入行准备开始。我们将变量 "h
+        和 "m "变量中，它们分别是小时和分钟的值。
+        map()和int()函数转换为整数数据类型。通过逗号 "h, m = map(int,...) "记录的形式等同于下一个形式
+        和 "m = int(...)"。我们使用int()函数对拆分行中的每个项使用分隔符":"。
+        行的每一项使用分隔符":"。
+       <pre class="brush: python">
+time = "07:00"
+h, m = map(int, time.split(':'))
+print(h)
+print(m)
+
+# Output:
+# 7
+# 0
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        我不知道该怎么做了。我需要一点提示。
+    </div>
+    <div class="answer">
+        让我们继续计算公式。小时和分钟与度数的关系如下：6小时=90度
+        度，所以90/6=15，1小时为15度；6小时=360分钟=90度，所以90/360=0.25，1分钟为0.25度。
+        为0.25度。6:00 = 0 度，那么在计算时，我们需要将其考虑在内。
+        从结果中减去90。计算公式如下
+       <pre class="brush: python">
+time = "07:00"
+h, m = map(int, time.split(':'))
+angle = 15 * h + m * 0.25 - 90
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        无效果。SOS
+    </div>
+    <div class="answer">
+        你必须写出if的条件，如果你将返回结果，如果太阳是可见的、
+        或者 "I don See the sun!"（我看不到太阳）。为此，我们使用三元运算符。
+       <pre class="brush: python">
+time = "07:00"
+h, m = map(int, time.split(':'))
+angle = 15 * h + m * 0.25 - 90
+print(angle) if 0 <= angle <= 180 else print("I don't see the sun!")
+
+# Output:
+# 15.0
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        我不想放弃，帮帮我！
+    </div>
+    <div class="answer">
+        您所要做的就是将您的代码封装在一个函数中，并在返回表达式中添加我们的if条件。
+       <pre class="brush: python">
+def sun_angle(time: str) -> Union[float, str]:
+    h, m = map(int, time.split(':'))
+    angle = 15 * h + m * 0.25 - 90
+    return angle if 0 <= angle <= 180 else "I don't see the sun!"
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        我想成为最好的程序员中的最好的程序员!!!告诉我更多的解决方案!!!1!!!11！
+    </div>
+    <div class="answer">
+        好的，好的！这就是精神！=)
+        公式与我们的决定相同，但不是将线划分为列表的组成部分，而是简单地使用
+        切片。
+       <pre class="brush: python">
+def sun_angle(time):
+    t = int(time[:2]) * 15 + int(time[3:]) / 4 - 90
+    return t if 0 <= t <= 180 else "I don't see the sun!"
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        我还想要更多！
+    </div>
+    <div class="answer">
+        看看这个解决方案。在datetime模块的帮助下，我们可以用时间单位进行计算、
+        然后将数值转换为角度单位。
+       <pre class="brush: python">
+import datetime
+def sun_angle(time):
+    start=datetime.datetime.strptime("06:00","%H:%M")
+    end=datetime.datetime.strptime("18:00","%H:%M")
+    time=datetime.datetime.strptime(time,"%H:%M")
+    diff=(time-start).seconds/60*0.25
+    return diff if start<=time<=end else "I don't see the sun!"
+        </pre>
+    </div>
+</div>
+
+
+</body>
