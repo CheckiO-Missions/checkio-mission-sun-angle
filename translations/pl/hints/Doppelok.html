@@ -1,0 +1,130 @@
+<body data-author="Doppelok">
+<div class="question-answer">
+    <div class="question">
+        Nie wiem, jak zacząć rozwiązywać tę misję
+    </div>
+    <div class="answer">
+        Chodzi o to, aby znaleźć zgodność między jedną godziną a jednym stopniem, między jedną minutą a jednym stopniem.
+         Następnie wystarczy obliczyć kąt nachylenia, biorąc pod uwagę, że 18:00 to 180 stopni, a 6:00 to 0 stopni.
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Potrzebuję pomocy, aby kontynuować misję
+    </div>
+    <div class="answer">
+        Pomocne będzie przeczytanie kilku informacji na temat:
+       <a href='https://docs.python.org/3.10/library/stdtypes.html'>str.split()</a>
+        (<a href='https://www.w3schools.com/python/ref_string_split.asp'>example</a> ),
+       <a href='https://docs.python.org/3.10/library/functions.html?#map'>map()</a>
+        (<a href='https://www.w3schools.com/python/ref_func_map.asp'>example</a> ), oraz
+       <a href='https://docs.python.org/3.10/library/functions.html?#int'>int()</a>
+        (<a href='https://www.w3schools.com/python/ref_func_int.asp'>example</a> ).
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Proszę o pomoc!
+    </div>
+    <div class="answer">
+        Zacznijmy od przygotowania naszej linii wejściowej przed obliczeniami. Przekażemy do zmiennych "h"
+        i "m" odpowiednio wartości godzin i minut, już przekonwertowane na typ danych całkowitych za pomocą funkcji
+        funkcji map() i int(). Forma zapisu przez przecinek "h, m = map(int, ...)" jest równoważna
+        następnej formie "h = int(...)" oraz "m = int(...)". Używamy funkcji int() do każdego elementu podzielonego wiersza
+        używając separatora ":".
+       <pre class="brush: python">
+time = "07:00"
+h, m = map(int, time.split(':'))
+print(h)
+print(m)
+
+# Output:
+# 7
+# 0
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Nie wiem już co robić. Proszę o małą podpowiedź.
+    </div>
+    <div class="answer">
+        Proszę przejść do wzoru obliczeniowego. Godziny i minuty korelują ze stopniami w następujący sposób: 6 godzin = 90
+        stopni, więc 90/6 = 15, 1 godzina to 15 stopni; 6 godzin = 360 minut = 90 stopni, więc 90/360 = 0,25, 1 minuta
+        to 0,25 stopnia. 6:00 = 0 stopni, więc przy obliczaniu musimy wziąć to pod uwagę, odejmując 90 stopni od wyniku
+        odejmując 90 od wyniku. Wzór będzie wyglądał następująco.
+       <pre class="brush: python">
+time = "07:00"
+h, m = map(int, time.split(':'))
+angle = 15 * h + m * 0.25 - 90
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Nic nie działa. SOS
+    </div>
+    <div class="answer">
+        Proszę napisać warunek if, który zwróci albo wynik, jeśli słońce jest widoczne,
+        lub wyrażenie "Nie widzę słońca!", jeśli słońce nie jest widoczne. Do tego celu używamy operatora trójargumentowego.
+       <pre class="brush: python">
+time = "07:00"
+h, m = map(int, time.split(':'))
+angle = 15 * h + m * 0.25 - 90
+print(angle) if 0 <= angle <= 180 else print("I don't see the sun!")
+
+# Output:
+# 15.0
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Nie chcę się poddawać, proszę pomóc!
+    </div>
+    <div class="answer">
+        Wszystko, co musi Pan zrobić, to zawinąć swój kod w funkcję i dodać nasz warunek if do zwracanego wyrażenia.
+       <pre class="brush: python">
+def sun_angle(time: str) -> Union[float, str]:
+    h, m = map(int, time.split(':'))
+    angle = 15 * h + m * 0.25 - 90
+    return angle if 0 <= angle <= 180 else "I don't see the sun!"
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Chcę być najlepszym z najlepszych PROGRAMISTÓW!!! PROSZĘ POKAZAĆ MI WIĘCEJ ROZWIĄZAŃ!!!1!!!11!
+    </div>
+    <div class="answer">
+        Dobra, dobra! That's the spirit!=)
+        Formuła jest taka sama jak w naszej decyzji, ale zamiast dzielić linię na składniki listy, po prostu używa się
+        krojenie.
+       <pre class="brush: python">
+def sun_angle(time):
+    t = int(time[:2]) * 15 + int(time[3:]) / 4 - 90
+    return t if 0 <= t <= 180 else "I don't see the sun!"
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Chcę więcej!
+    </div>
+    <div class="answer">
+        Proszę spojrzeć na to rozwiązanie. Z pomocą modułu datetime możemy wykonać nasze obliczenia w jednostkach czasu,
+        a dopiero potem przetłumaczyć wartość na jednostki kątowe.
+       <pre class="brush: python">
+import datetime
+def sun_angle(time):
+    start=datetime.datetime.strptime("06:00","%H:%M")
+    end=datetime.datetime.strptime("18:00","%H:%M")
+    time=datetime.datetime.strptime(time,"%H:%M")
+    diff=(time-start).seconds/60*0.25
+    return diff if start<=time<=end else "I don't see the sun!"
+        </pre>
+    </div>
+</div>
+
+
+</body>
